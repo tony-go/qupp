@@ -3,7 +3,6 @@
 
 #include <gtest/gtest.h>
 
-#include <cassert>
 #include <vector>
 
 struct MockTerminal : public qupp::io::TerminalInterface {
