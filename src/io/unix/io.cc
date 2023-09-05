@@ -8,7 +8,9 @@ Terminal &Terminal::get_instance() {
   return instance;
 }
 
-void Terminal::print(const std::string &message) { std::cout << message; }
+void Terminal::print(const std::string &message) {
+  std::cout << message << std::endl;
+}
 
 std::string Terminal::read() {
   std::string input;
