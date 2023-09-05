@@ -26,7 +26,7 @@ private:
   std::string answer_;
 };
 
-TEST(prompt, ask_for_input) {
+TEST(ask_for_input, happy_path) {
   std::string question = "This a question.";
   std::string answer = "This is an answer.";
   MockTerminal mock_terminal;
@@ -35,6 +35,17 @@ TEST(prompt, ask_for_input) {
   qupp::prompt::Prompt prompt(mock_terminal);
   auto result = prompt.ask_for_input(question);
 
-  EXPECT_EQ(result, answer);
+  EXPECT_EQ(result.value(), answer);
   EXPECT_TRUE(mock_terminal.has_printed(question));
+}
+
+TEST(ask_for_input, empty_question) {
+  std::string empty_question = "";
+  MockTerminal mock_terminal;
+
+  qupp::prompt::Prompt prompt(mock_terminal);
+  auto result = prompt.ask_for_input(empty_question);
+
+  EXPECT_FALSE(result.has_value());
+  EXPECT_FALSE(mock_terminal.has_printed(empty_question));
 }

@@ -6,7 +6,10 @@
 namespace qupp::prompt {
 Prompt::Prompt(qupp::io::TerminalInterface &terminal) : terminal_(terminal) {}
 
-std::string Prompt::ask_for_input(const std::string &question) {
+StringResult Prompt::ask_for_input(const std::string &question) {
+  if (question.empty()) {
+    return std::nullopt;
+  }
   terminal_.print(question);
   return terminal_.read();
 }
