@@ -1,0 +1,34 @@
+name: Build and Test
+
+on: [push]
+
+jobs:
+  build:
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake g++
+      if: runner.os == 'Linux'
+      
+    - name: Install dependencies (macOS)
+      run: |
+        brew install cmake
+      if: runner.os == 'macOS'
+      
+    - name: Build
+      run: make
+        
+    - name: Run Tests
+      run: make test
+
