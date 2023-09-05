@@ -17,8 +17,8 @@
 
 int main() {
     qupp::prompt::Prompt prompt;
-    std::string input = prompt.ask_for_input("What's your name? ");
-    std::cout << "Hello, " << input << "!" << std::endl;
+    auto result = prompt.ask_for_input("What's your name? ");
+    std::cout << "Hello, " << result.value() << "!" << std::endl;
     return 0;
 }
 ```
