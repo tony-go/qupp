@@ -10,7 +10,8 @@ StringResult Prompt::ask_for_input(const std::string &question) {
   if (question.empty()) {
     return std::nullopt;
   }
-  terminal_.print(question);
+  terminal_.print(question, false);
+  terminal_.move_cursor_right(1);
   return terminal_.read();
 }
 } // namespace qupp::prompt

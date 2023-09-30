@@ -6,11 +6,16 @@
 #include <vector>
 
 struct MockTerminal : public qupp::io::TerminalInterface {
-  void print(const std::string &message) override {
+  void print(const std::string &message, bool) override {
     messages_.push_back(message);
   }
 
   std::string read() override { return answer_; }
+
+  void move_cursor_left(int n) override {}
+  void move_cursor_right(int n) override {}
+  void move_cursor_up(int n) override {}
+  void move_cursor_down(int n) override {}
 
   // Test helper function.
 
